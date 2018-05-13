@@ -79,9 +79,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.menuDrawerItemAdicionarReceita) {
             setTitle("Adicionar Receitas");
 
-
-
-
             Bundle bundle = new Bundle();
             bundle.putString("tipo", "Receita");
 
@@ -89,11 +86,6 @@ public class MainActivity extends AppCompatActivity
             this.fragment = new FormularioAdicionarActivity();
 
             this.fragment.setArguments(bundle);
-
-
-
-
-
 
         } else if (id == R.id.menuDrawerItemRelatorio) {
 
