@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menuDrawerItemVisaoGeral"
+            android:icon="@drawable/ic_visao_geral"
+            android:title="Visão Geral" />
+        <item
+            android:id="@+id/menuDrawerItemAdicionarDespesa"
+            android:icon="@drawable/ic_despesa"
+            android:title="Registrar Despesa" />
+        <item
+            android:id="@+id/menuDrawerItemAdicionarReceita"
+            android:icon="@drawable/ic_receita"
+            android:title="Registrar Receita" />
+        <item
+            android:id="@+id/menuDrawerItemRelatorio"
+            android:icon="@drawable/ic_equalizer_black_24dp"
+            android:title="Relatório Finanças" />
+        <item
+            android:id="@+id/menuDrawerAdicionarCategoria"
+            android:icon="@drawable/ic_add_categoria"
+            android:title="Adicionar Categoria" />
+    </group>
+</menu>
