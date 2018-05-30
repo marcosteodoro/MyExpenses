@@ -6,5 +6,5 @@
     <color name="colorReceitas">#0089c5</color>
     <color name="colordespesas">#d10000</color>
     <color name="visaoGeralFloatingActionMenuPressed">#37474f</color>
-    <color name="textColorPrimary">#000000</color>
+    <color name="textColorPrimary">#ffffff</color>
 </resources>

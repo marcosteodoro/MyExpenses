@@ -6,7 +6,7 @@ import android.widget.Spinner;
 import coms.example.marcosvinicius.myexpenses.model.DespesaReceita;
 
 public class FormularioHelper {
-    /*private final EditText campoValor;
+    private final EditText campoValor;
     private final Spinner campoCategoria;
     private final EditText campoObservacao;
     private final String tipo;
@@ -14,7 +14,7 @@ public class FormularioHelper {
     /**
      * Método construtor da classe
      */
-    /* public FormularioHelper(FormularioAdicionarActivity formularioAdicionarActivity) {
+    public FormularioHelper(FormularioAdicionarActivity formularioAdicionarActivity) {
         this.campoValor = (EditText) formularioAdicionarActivity.findViewById(R.id.formularioAdicionarValor);
         this.campoCategoria = (Spinner) formularioAdicionarActivity.findViewById(R.id.formularioAdicionarCategoria);
         this.campoObservacao = (EditText) formularioAdicionarActivity.findViewById(R.id.formularioAdicionarObservacao);
@@ -30,5 +30,5 @@ public class FormularioHelper {
         registro.setTipo(this.tipo);
 
         return registro;
-    } */
+    }
 }

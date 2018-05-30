@@ -1,5 +1,6 @@
 package coms.example.marcosvinicius.myexpenses;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -65,28 +66,23 @@ public class MainActivity extends AppCompatActivity
             setTitle("MyExpenses");
             this.fragment = new VisaoGeralActivity();
         } else if (id == R.id.menuDrawerItemAdicionarDespesa) {
-            setTitle("Adicionar Despesa");
-
-
             Bundle bundle = new Bundle();
             bundle.putString("tipo", "Despesa");
 
+            Intent adicionarRegistro = new Intent(MainActivity.this, FormularioAdicionarActivity.class);
 
-            this.fragment = new FormularioAdicionarActivity();
-
-            this.fragment.setArguments(bundle);
-
+            adicionarRegistro.putExtra("tipo", "Despesa");
+            startActivity(adicionarRegistro);
+            return true;
         } else if (id == R.id.menuDrawerItemAdicionarReceita) {
-            setTitle("Adicionar Receitas");
-
             Bundle bundle = new Bundle();
             bundle.putString("tipo", "Receita");
 
+            Intent adicionarRegistro = new Intent(MainActivity.this, FormularioAdicionarActivity.class);
 
-            this.fragment = new FormularioAdicionarActivity();
-
-            this.fragment.setArguments(bundle);
-
+            adicionarRegistro.putExtra("tipo", "Despesa");
+            startActivity(adicionarRegistro);
+            return true;
         } else if (id == R.id.menuDrawerItemRelatorio) {
 
         } else if (id == R.id.menuDrawerAdicionarCategoria) {
@@ -102,7 +98,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * Método responsável por gerenciar o carregamento do Fragmente selecionado no FrameLayout
+     * Método responsável por gerenciar o carregamento do Fragment selecionado no FrameLayout
      */
     public boolean setLayoutFragment()
     {

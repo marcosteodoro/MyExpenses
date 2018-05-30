@@ -1,5 +1,6 @@
 package coms.example.marcosvinicius.myexpenses;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -36,40 +37,23 @@ public class VisaoGeralActivity extends Fragment {
 
                 bundle.putString("tipo", "Despesa");
 
-                Fragment fragment = new FormularioAdicionarActivity();
+                Intent adicionarRegistro = new Intent(getActivity(), FormularioAdicionarActivity.class);
 
-                fragment.setArguments(bundle);
-
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                fragmentTransaction.replace(R.id.screen_area, fragment);
-
-                fragmentTransaction.commit();
+                adicionarRegistro.putExtra("tipo", "Despesa");
+                startActivity(adicionarRegistro);
             }
         });
 
         buttonAdicionarReceita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().setTitle("Adicionar Receita");
-
                 Bundle bundle = new Bundle();
-
                 bundle.putString("tipo", "Receita");
 
-                Fragment fragment = new FormularioAdicionarActivity();
+                Intent adicionarRegistro = new Intent(getActivity(), FormularioAdicionarActivity.class);
 
-                fragment.setArguments(bundle);
-
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                fragmentTransaction.replace(R.id.screen_area, fragment);
-
-                fragmentTransaction.commit();
+                adicionarRegistro.putExtra("tipo", "Receita");
+                startActivity(adicionarRegistro);
             }
         });
     }

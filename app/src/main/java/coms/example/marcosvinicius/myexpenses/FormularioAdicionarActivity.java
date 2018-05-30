@@ -1,55 +1,62 @@
 package coms.example.marcosvinicius.myexpenses;
 
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class FormularioAdicionarActivity extends Fragment {
+import coms.example.marcosvinicius.myexpenses.model.DespesaReceita;
+
+public class FormularioAdicionarActivity extends AppCompatActivity {
+
     private String tipo = "";
+    private FormularioHelper helper;
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
-        View v = inflater.inflate(R.layout.activity_formulario_adicionar, container, false);
-
-        this.tipo = getArguments().getString("tipo");
-
-        String[] categorias = {"Alimentação", "Transporte", "Hobby", "Lazer"};
-        Spinner spinner = (Spinner) v.findViewById(R.id.formularioAdicionarCategoria);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, categorias);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinner.setAdapter(adapter);
-
-
-        return v;
+    public String getTipo() {
+        return tipo;
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+
+        Bundle extras = getIntent().getExtras();
+
+        this.setTipo(extras.getString("tipo"));
+
+        setTitle("Adicionar " + this.tipo);
+
+        setContentView(R.layout.activity_formulario_adicionar);
+
+        String[] categorias = {"Alimentação", "Transporte", "Lazer", "Diversos"};
+
+        Spinner dropdownCategorias = (Spinner) findViewById(R.id.formularioAdicionarCategoria);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias);
+
+        dropdownCategorias.setAdapter(adapter);
+
+        this.helper = new FormularioHelper(this);
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+
         inflater.inflate(R.menu.menu_formulario, menu);
-        super.onCreateOptionsMenu(menu, inflater);
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -58,21 +65,14 @@ public class FormularioAdicionarActivity extends Fragment {
         switch (item.getItemId()) {
             case R.id.menuFormularioAdicionarSalvar:
 
-                Fragment fragment = new VisaoGeralActivity();
+                DespesaReceita registro = this.helper.getDespesaReceita();
 
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                fragmentTransaction.replace(R.id.screen_area, fragment);
-
-                fragmentTransaction.commit();
-
-                Toast.makeText(this.getActivity(), this.tipo + " adicionada", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(this, this.tipo + " adicionada!", Toast.LENGTH_SHORT).show();
+                finish();
                 break;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 }
