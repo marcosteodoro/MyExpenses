@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.nfc.Tag;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +15,21 @@ import coms.example.marcosvinicius.myexpenses.model.Categoria;
 
 public class DaoCategoria extends SQLiteOpenHelper {
 
+    private SQLiteDatabase database;
+
     public DaoCategoria(Context context) {
         super(context, "MyExpenses", null, 1);
+
+        String sql = "CREATE TABLE IF NOT EXISTS Categoria (id INTEGER PRIMARY KEY, descricao TEXT NOT NULL);";
+
+        this.database = getWritableDatabase();
+
+        this.database.execSQL(sql);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE Categoria (" +
-                "id INTEGER PRIMARY KEY," +
-                "descricao TEXT);";
 
-        db.execSQL(sql);
     }
 
     @Override
