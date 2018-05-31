@@ -1,9 +1,7 @@
 package coms.example.marcosvinicius.myexpenses;
 
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,12 +9,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.List;
+
+import coms.example.marcosvinicius.myexpenses.dao.DaoCategoria;
+import coms.example.marcosvinicius.myexpenses.dao.DaoDespesaReceita;
+import coms.example.marcosvinicius.myexpenses.helpers.FormularioDespesaReceitaHelper;
+import coms.example.marcosvinicius.myexpenses.model.Categoria;
 import coms.example.marcosvinicius.myexpenses.model.DespesaReceita;
 
 public class FormularioAdicionarActivity extends AppCompatActivity {
 
     private String tipo = "";
-    private FormularioHelper helper;
+    private FormularioDespesaReceitaHelper helper;
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
@@ -39,15 +43,18 @@ public class FormularioAdicionarActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_formulario_adicionar);
 
-        String[] categorias = {"Alimentação", "Transporte", "Lazer", "Diversos"};
+        DaoCategoria obDaoCategoria= new DaoCategoria(this);
+
+
+        List<Categoria> categorias = obDaoCategoria.select();
 
         Spinner dropdownCategorias = (Spinner) findViewById(R.id.formularioAdicionarCategoria);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias);
+        ArrayAdapter<Categoria> adapter = new ArrayAdapter<Categoria>(this, android.R.layout.simple_spinner_dropdown_item, categorias);
 
         dropdownCategorias.setAdapter(adapter);
 
-        this.helper = new FormularioHelper(this);
+        this.helper = new FormularioDespesaReceitaHelper(this);
     }
 
     @Override
@@ -65,7 +72,11 @@ public class FormularioAdicionarActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menuFormularioAdicionarSalvar:
 
-                DespesaReceita registro = this.helper.getDespesaReceita();
+                DespesaReceita obDespesaReceita = this.helper.getDespesaReceita();
+                DaoDespesaReceita obDaoDespesaReceita = new DaoDespesaReceita(this);
+
+                obDaoDespesaReceita.insert(obDespesaReceita);
+                obDaoDespesaReceita.close();
 
                 Toast.makeText(this, this.tipo + " adicionada!", Toast.LENGTH_SHORT).show();
                 finish();

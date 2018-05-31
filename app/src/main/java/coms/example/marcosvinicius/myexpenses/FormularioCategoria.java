@@ -1,41 +1,46 @@
 package coms.example.marcosvinicius.myexpenses;
 
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-public class FormularioCategoria extends Fragment {
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_formulario_cagetoria, null);
-    }
+import java.util.List;
+
+import coms.example.marcosvinicius.myexpenses.dao.DaoCategoria;
+import coms.example.marcosvinicius.myexpenses.dao.DaoDespesaReceita;
+import coms.example.marcosvinicius.myexpenses.helpers.FormularioCategoriaHelper;
+import coms.example.marcosvinicius.myexpenses.helpers.FormularioDespesaReceitaHelper;
+import coms.example.marcosvinicius.myexpenses.model.Categoria;
+import coms.example.marcosvinicius.myexpenses.model.DespesaReceita;
+
+public class FormularioCategoria extends AppCompatActivity {
+
+    private FormularioCategoriaHelper helper;
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
+    protected void onCreate(Bundle savedInstanceState) {
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+
+        setTitle("Adicionar Categoria");
+
+        setContentView(R.layout.fragment_formulario_cagetoria);
+
+        this.helper = new FormularioCategoriaHelper(this);
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+
         inflater.inflate(R.menu.menu_formulario, menu);
-        super.onCreateOptionsMenu(menu, inflater);
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -44,21 +49,18 @@ public class FormularioCategoria extends Fragment {
         switch (item.getItemId()) {
             case R.id.menuFormularioAdicionarSalvar:
 
-                Fragment fragment = new VisaoGeralActivity();
+                Categoria obCategoria = this.helper.getCategoria();
+                DaoCategoria obDaoCategoria = new DaoCategoria(this);
 
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                obDaoCategoria.insert(obCategoria);
+                obDaoCategoria.close();
 
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                fragmentTransaction.replace(R.id.screen_area, fragment);
-
-                fragmentTransaction.commit();
-
-                Toast.makeText(this.getActivity(), "Categoria adicionada", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(this, "Categoria adicionada!", Toast.LENGTH_SHORT).show();
+                finish();
                 break;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 }

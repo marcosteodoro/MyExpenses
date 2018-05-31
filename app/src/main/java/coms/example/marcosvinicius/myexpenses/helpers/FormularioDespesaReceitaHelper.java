@@ -1,11 +1,13 @@
-package coms.example.marcosvinicius.myexpenses;
+package coms.example.marcosvinicius.myexpenses.helpers;
 
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import coms.example.marcosvinicius.myexpenses.FormularioAdicionarActivity;
+import coms.example.marcosvinicius.myexpenses.R;
 import coms.example.marcosvinicius.myexpenses.model.DespesaReceita;
 
-public class FormularioHelper {
+public class FormularioDespesaReceitaHelper {
     private final EditText campoValor;
     private final Spinner campoCategoria;
     private final EditText campoObservacao;
@@ -14,7 +16,7 @@ public class FormularioHelper {
     /**
      * Método construtor da classe
      */
-    public FormularioHelper(FormularioAdicionarActivity formularioAdicionarActivity) {
+    public FormularioDespesaReceitaHelper(FormularioAdicionarActivity formularioAdicionarActivity) {
         this.campoValor = (EditText) formularioAdicionarActivity.findViewById(R.id.formularioAdicionarValor);
         this.campoCategoria = (Spinner) formularioAdicionarActivity.findViewById(R.id.formularioAdicionarCategoria);
         this.campoObservacao = (EditText) formularioAdicionarActivity.findViewById(R.id.formularioAdicionarObservacao);

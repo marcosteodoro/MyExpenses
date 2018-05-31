@@ -85,9 +85,13 @@ public class MainActivity extends AppCompatActivity
             return true;
         } else if (id == R.id.menuDrawerItemRelatorio) {
 
+            Intent listaDespesaReceita = new Intent(MainActivity.this, ListaReceitaDespesaActivity.class);
+
+            startActivity(listaDespesaReceita);
         } else if (id == R.id.menuDrawerAdicionarCategoria) {
             setTitle("Adicionar Receitas");
-            this.fragment = new FormularioCategoria();
+            Intent formularioCategoria = new Intent(MainActivity.this, FormularioCategoria.class);
+            startActivity(formularioCategoria);
         }
 
         this.setLayoutFragment();
